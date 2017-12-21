@@ -1,7 +1,5 @@
 
-form {
-    border: 3px solid #f1f1f1;
-}
+
 
 label{
     width: 25%;
@@ -17,7 +15,6 @@ input[type=text], input[type=password] {
     left: 25%;
     margin: auto;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
     text-align: center;
 }
