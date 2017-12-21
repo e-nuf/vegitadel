@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="firebase.js"></script>
+
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "style.css" />
+
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "loginform.css" />
+
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<div id = main>
+
+    <h2>Add vegitables</h2>
+
+
+
+    <form>
+        <div class="container">
+            <label><b>vegitable</b></label>
+            <input type="text" placeholder="Enter Vegitable" name="veg" required><br>
+
+            <label><b>quantity</b></label>
+            <input type="text" placeholder="Enter Quantity" name="qty" required><br>
+
+            <label><b>price</b></label>
+            <input type="text" placeholder="Enter Price" name="price" required><br>
+
+            <label><b>date</b></label>
+            <input type="text" placeholder="Enter Pluck Date" name="date" required><br>
+
+        </div>
+
+        <div class="container">
+            <button type="button" class="cancelbtn">Cancel</button>
+        </div>
+    </form>
+
+    <button type="submit" onclick="submitveg()">submit vegitable</button>
+
+</div>
+
+
+</body>
+</html>
