@@ -1,0 +1,102 @@
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: whitesmoke;
+    display: block;
+    transition: 0.3s;
+    font-family: roboto;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+img {
+    display: block;
+    max-width:200px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+    margin-left:50px;
+    margin-bottom: 20px;
+
+}
+
+/* side bart is over , begining topbar*/
+/* Change the color of links on hover */
+
+#topnavbar {
+
+    background-color: rgba(255,255,255,1);
+    overflow: hidden;
+    position: relative;
+    left:0;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: -3px 3px 7px gray;
+
+
+}
+
+
+
+/* Style the links inside the navigation bar */
+#topnavbar a {
+    float: left;
+    color: darkgray;
+    text-align: center;
+    padding: 2% 6%;
+    text-decoration: none;
+    font-size: 120%;
+    font-family: roboto;
+
+}
+#topnavbar a:hover {
+
+    color: #dddddd;
+}
+
+
+
+
+
+

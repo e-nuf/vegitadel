@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="firebase.js"></script>
+    <script type="text/javascript" src="sidemenu.js"></script>
+
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "style.css" />
+
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "loginform.css" />
+
+    <title>Title</title>
+</head>
+<body>
+
+<div id="sidemenu" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    <a href="#">account</a>
+    <a href="#">add vegitables</a>
+    <a href="#">current orders</a>
+    <a href="#">settings</a>
+</div>
+
+
+
+<div id = main>
+    <div class="topnav" id="topnavbar">
+        <a onclick="openNav()">seller</a>
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="#contact">buy vegitables</a>
+        <a href="#about">purchases</a>
+
+
+    </div>
+
+    <p id = "sahil">hello</p>
+
+    <h2>Login Form</h2>
+
+
+
+    <form>
+        <div class="imgcontainer">
+            <img src="img_avatar2.png" type="avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label><b>Create account</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required><br>
+
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter email" name="email" required><br>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required><br>
+
+
+            <input type="checkbox" checked="checked"> Remember me
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+
+    <button type="submit" onclick="login()">register</button>
+
+</div>
+
+
+</body>
+</html>
