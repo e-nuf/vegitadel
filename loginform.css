@@ -8,7 +8,7 @@ label{
     margin: auto;
 
 }
-input[type=text], input[type=password] {
+input[type=text], input[type=password] ,[type = file]{
     width: 25%;
     position: relative;
     padding: 12px 20px;
