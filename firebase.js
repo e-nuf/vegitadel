@@ -11,12 +11,12 @@ var config = {
     messagingSenderId: "744766186673"
 };
 firebase.initializeApp(config);
+filestorage = firebase.storage();
 
 function writeUserData(userId, email, password) {
     firebase.database().ref('users/'+userId).update({
         email: email,
         password:password,
-        products:"na"
     });
     document.cookie = userId
 }
@@ -44,7 +44,7 @@ function login() {
     closeframe();
 }
 
-function writevegitables(name,quantity,price,date) {
+function writevegitables(name,quantity,price,date,image) {
     usernames = document.cookie.split(";");
     username = usernames[0]
 
@@ -53,15 +53,20 @@ function writevegitables(name,quantity,price,date) {
         price:price,
         date:date})
 
+    filestorage.ref('users/'+username+"/products/"+name+"/"+image.name).put(image)
 }
+
+
 
 function submitveg() {
     var form= document.forms[0];
 
+    var photos = document.getElementById("photo");
+    var photo = photos.files[0];
     var name =form["veg"].value;
     var quantity= form["qty"].value;
     var price = form["price"].value;
     var date = form["date"].value;
-    writevegitables(name,quantity,price,date)
+    writevegitables(name,quantity,price,date,photo);
     closeframe();
 }
