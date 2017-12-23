@@ -22,16 +22,6 @@ function writeUserData(userId, email, password) {
 }
 
 
-read_data = 0
-function readUserData(userId) {
-    firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-        username = (snapshot.val() && snapshot.val().email) || 'Anonymous';
-        var doc = document.getElementById("sahil");
-        doc.innerHTML = username;
-        read_data = 1
-
-    });
-}
 
 function login() {
     var form= document.forms[0];
@@ -70,3 +60,85 @@ function submitveg() {
     writevegitables(name,quantity,price,date,photo);
     closeframe();
 }
+
+
+
+
+/* read functions go here
+
+
+
+--- the exclusion zone
+ read functions below
+ do not mix and match
+ i repeat do not-----
+
+ */
+
+/*
+the read functions are multithreaded if you want to do anything
+you have to do things inside the snapshot or the child function
+ */
+
+function readUsernames() {
+    var rootref = firebase.database().ref();
+    var userref = rootref.child("users");
+    userref.once("value",function(snapshot){
+        /*
+        do things for entire user set
+         */
+
+
+        /*
+         this function iterates over the entire user base for each user
+         */
+        snapshot.forEach(function(child) {
+            /*
+             do things for each individual users
+             */
+            readUserData(child.key)
+
+        });
+    });
+}
+
+
+function readUserData(userId) {
+    var prodref = firebase.database().ref('/users/'+userId);
+    var itemref = prodref.child("products");
+    itemref.once('value').then(function(snapshot) {
+        /*
+         do things for entire product base inside a user
+         */
+
+        /*
+        this function iterates over the enter product base for each product
+         */
+        snapshot.forEach(function (child) {
+            /*
+             do things for a single product base inside a user
+             */
+            var values= child.val();
+            changetest(child.key,values.price,values.quantity,values.date);
+            alert(child.val().quantity)
+
+        });
+    });
+}
+
+
+function changetest(names,prices,quantity,dates) {
+/*
+this is the function used to change the data on the frame of the buyer website
+ */
+    var name = document.getElementById("name");
+    var price = document.getElementById("price");
+    var qua = document.getElementById("quantity");
+    var date = document.getElementById("date");
+
+    name.innerHTML = names;
+    price.innerHTML = prices;
+    qua.innerHTML = quantity;
+    date.innerHTML = dates;
+}
+

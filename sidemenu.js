@@ -14,21 +14,14 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
-function openlogin() {
+function openframe(file) {
     var doc = document.getElementById("showframe");
-    doc.src = "login.html";
+    doc.src = file;
     doc.style.width = "75%";
     doc.style.height = "700px"
 
 }
 
-function openaddveg() {
-    var doc = document.getElementById("showframe");
-    doc.src = "vegitable.html";
-    doc.style.width = "75%";
-    doc.style.height = "700px"
-
-}
 
 function closeframe() {
     var doc = document.getElementById("showframe");
