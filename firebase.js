@@ -120,18 +120,18 @@ function readUserData(userId) {
              */
             var values= child.val();
             changetest(child.key,values.price,values.quantity,values.date);
-            alert(child.val().quantity)
+            
 
         });
     });
 }
 
-
+/*
 function changetest(names,prices,quantity,dates) {
 /*
 this is the function used to change the data on the frame of the buyer website
  */
-    var name = document.getElementById("name");
+/*    var name = document.getElementById("name");
     var price = document.getElementById("price");
     var qua = document.getElementById("quantity");
     var date = document.getElementById("date");
@@ -141,4 +141,23 @@ this is the function used to change the data on the frame of the buyer website
     qua.innerHTML = quantity;
     date.innerHTML = dates;
 }
+*/
 
+function changetest(names,prices,quantity,dates) {
+        var mc = document.getElementById("main-content");
+        var name = document.createElement("LABEL");
+        var price = document.createElement("LABEL");
+        var qua = document.createElement("LABEL");
+        var date = document.createElement("LABEL");
+
+        name.innerHTML = "name: "+names+"<br>";
+        price.innerHTML = "price: "+prices+"<br>";
+        qua.innerHTML = "quantity: "+quantity+"<br>";
+        date.innerHTML = "date: "+dates+"<br><br>";
+
+        mc.appendChild(name);
+        mc.appendChild(price);
+        mc.appendChild(qua);
+        mc.appendChild(date);
+    
+    }
