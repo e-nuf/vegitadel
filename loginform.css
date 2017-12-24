@@ -1,5 +1,8 @@
-
-
+.psw{
+    align-content: center;
+    text-align: center;
+    display: block;
+}
 
 label{
     width: 25%;
@@ -8,38 +11,48 @@ label{
     margin: auto;
 
 }
-input[type=text], input[type=password] ,[type = file]{
-    width: 25%;
+input{
+    width: 20%;
+    height: 30px;
     position: relative;
-    padding: 12px 20px;
+    padding: 2px;
     left: 25%;
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    text-align: center;
-}
+    margin: -3px;
+    margin-left: 20%;
+    margin-right: auto;
+    display: block;
+    }
 
-button {
+.area{
+    width: 20%;
+    height: 60px;
     position: relative;
+    padding: 10px;
     left: 25%;
+    margin: -3px;
+    margin-left: 20%;
+    margin-right: auto;
+    display: block;
+
+    }
+
+.sub{
+    position: relative;
+    left: 0%;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     margin: auto;
+    margin-top:3px; 
     border: none;
     cursor: pointer;
-    width: 25%;
+    width: 20%;
     text-align: center;
+    height: 45px;
 }
 
-button:hover {
+.sub:hover {
     opacity: 0.8;
-}
-
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
 }
 
 
@@ -57,7 +70,7 @@ span.psw {
 @media screen and (max-width: 300px) {
     span.psw {
         display: block;
-        float: none;
+        float: left;
     }
     .cancelbtn {
         width: 100%;
@@ -68,7 +81,21 @@ img [type = avatar]{
     position: relative;
     max-width:200px;
     max-height:150px;
+    mi
     width: auto;
     height: auto;
-    left: 50%;
+    
+}
+
+.add{
+    height: 100px;
+    
+    
+}
+
+.che{
+    position: relative;
+    float: left;
+    text-align: center;
+    left:25%;
 }

@@ -6,7 +6,7 @@ function openNav() {
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
-
+ 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
     document.getElementById("sidemenu").style.width = "0";
@@ -14,11 +14,12 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
-function openframe(file) {
+
+function openFrame(file) {
     var doc = document.getElementById("showframe");
     doc.src = file;
-    doc.style.width = "75%";
-    doc.style.height = "700px"
+    doc.style.width = "80%";
+    doc.style.height = "800px"
 
 }
 
@@ -29,3 +30,22 @@ function closeframe() {
     doc.style.width = "0";
     doc.style.height = "0"
 }
+
+function changeconsole() {
+    var purchases = document.getElementById("purchases");
+    purchases.innerHTML ="purchases";
+
+
+    var order= document.getElementById("orders");
+    order.innerHTML ="orders";
+
+    var sellers= document.getElementById("sellers");
+    sellers.innerHTML ="add vegitables";
+    sellers.onclick = function() {openFrame('vegitable.html');};
+
+    var loi= document.getElementById("loi");
+    loi.innerHTML ="profile";
+    loi.onclick = function(){openNav();};
+
+}
+
