@@ -14,6 +14,7 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
+
 function openFrame(file) {
     var doc = document.getElementById("showframe");
     doc.src = file;
@@ -21,6 +22,7 @@ function openFrame(file) {
     doc.style.height = "800px"
 
 }
+
 
 function closeframe() {
     var doc = document.getElementById("showframe");
