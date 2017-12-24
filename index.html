@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <meta charset="UTF-8">
     <title>vegitadel</title>
-
-    <link rel = "stylesheet"
-          type = "text/css"
-          href = "style.css" />
-
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
     <script type="text/javascript" src="sidemenu.js"></script>
     <script type="text/javascript" src="firebase.js"></script>
 </head>
-<body>
+<body id="bod" >
 <div id="sidemenu" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    <a href="#">account</a>
-    <a href="#" onclick="openaddveg()">add vegitables</a>
-    <a href="#" >current orders</a>
-    <a href="#">settings</a>
+    <a href="#">Account Details</a>
+    <a href="#">Settings</a>
+    <a href=""></a>
+    <a id="signout" class="sinout" href="" onclick="signout()">signout</a>
 </div>
-
 
 <div id="main">
 
     <div class="topnav" id="topnavbar">
-        <a href="#" onclick="openNav()">seller</a>
-        <a href="index.html">Home</a>
-        <a href="#" onclick="openlogin()">Login</a>
-        <a href="#contact">buy vegitables</a>
-        <a href="#about">purchases</a>
-
-
+        <a href="index.html" id="home">Home</a>
+        <a href="#" id="sellers">Sellers</a>
+        <a href="#" onclick="openFrame('buyer.html')" id="seep">buy vegitables</a>
+        <a href="" id="purchases"></a>
+        <a href="" id = "orders"></a>
+        <a href="#" onclick="openFrame('login.html')" id="loi">Login</a>
+        
     </div>
 
-    <iframe src = login.html id = "showframe">
+    <iframe  id="showframe"></iframe>
 
-    </iframe>
+
+<script type="text/javascript">
+
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        document.getElementById('signout').innerHTML = "Sign-out";
+        console.log(user.email+" is logged In");
+        changeconsole()
+
+    }
+    else {
+    // User is signed out.
+    document.getElementById('signout').innerHTML = "";
+    console.log("User is  logged out ");
+           }
+
+    });
+</script>
 
 </div>
 </body>

@@ -3,9 +3,7 @@
 <head>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="firebase.js"></script>
-
-    <link rel = "stylesheet"
+   <link rel = "stylesheet"
           type = "text/css"
           href = "style.css" />
 
@@ -13,49 +11,42 @@
           type = "text/css"
           href = "loginform.css" />
 
-    <title>Title</title>
+    <title>LogIn</title>
 </head>
 <body>
+<div class=main>
+    <center>
+    <p id = "sahil">Hello</p>
+    <h2 al>Login Form</h2>
+    </center>
+    <script type="text/javascript" src="firebase.js"></script>
 
 
-
-
-<div id = main>
-
-    <p id = "sahil">hello</p>
-
-    <h2>Login Form</h2>
-
-
-
-    <form>
-        <div class="imgcontainer">
+    <form  method="post">
+        <div class="imgcontainer" align="center">
             <img src="img_avatar2.png" type="avatar" class="avatar">
         </div>
 
         <div class="container">
             <label><b>User Name</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required><br>
+            <input type="text" placeholder="Enter Username"   class="in" id="uname" ><br>
 
             <label><b>Email Id</b></label>
-            <input type="text" placeholder="Enter email" name="email" required><br>
+            <input type="email" placeholder="Enter email"  id="em" class="in" required><br>
 
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required><br>
-
-
-            <input type="checkbox" checked="checked"> Remember me
+            <input type="password" placeholder="Enter Password" class="in" id="psw" required><br>
+            <span class="psw">Forgot <a href="#">password?</a></span><br>
         </div>
+    </form>       
+            <button  class="sub" onclick="loginto()" id="ln">Login</button>
 
-        <div class="container">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
+            <button  class="sub"  onclick="location.href='register.html';">Register</button>
 
-    <button type="submit" onclick="login()">register</button>
+     
 
 </div>
+
 
 
 </body>
