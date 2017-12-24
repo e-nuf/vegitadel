@@ -1,0 +1,24 @@
+img {
+    position: relative;
+    max-width:250px;
+    max-height:200px;
+    width: auto;
+    height: auto;
+    left: 0;
+    vertical-align: middle;
+    z-index: -1;
+}
+
+label {
+    position: relative;
+    font-family: roboto;
+}
+
+div {
+    height: 3%;
+    line-height: 300%;
+    text-align: center;
+    border: 2px dashed #f69c55;
+}
+
+
