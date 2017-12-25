@@ -1,4 +1,11 @@
 /* The side navigation menu */
+body[id = "index body"]{
+    background-image: url("background.jpg");
+    background-color: #F9EC7C;
+    background-size:cover;
+
+}
+
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
