@@ -14,10 +14,11 @@ var config = {
     databaseURL: "https://vegitadel.firebaseio.com",
     projectId: "vegitadel",
     storageBucket: "vegitadel.appspot.com",
-    messagingSenderId: "744766186673",
+    messagingSenderId: "744766186673"
 };
 
 firebase.initializeApp(config);
+filestorage = firebase.storage();
 
 
 /*
@@ -37,7 +38,7 @@ function register() {
 
 
     //sign_in
-    if (pass_re === pass && email && pass != "") {
+    if (pass_re === pass && email && pass) {
         firebase.auth().createUserWithEmailAndPassword(email, pass).then(function () {
             adduser()
         }).catch(function (error) {
@@ -85,19 +86,6 @@ function signout() {
 }
 
 
-firebase.auth().onAuthStateChanged(function (user) {
-
-    if (user) {
-
-        console.log(user.email + " is logged In");
-
-    }
-    else {
-        // User is signed out.
-        console.log("User is  logged out ");
-    }
-
-});
 
 
 
@@ -113,7 +101,7 @@ firebase.auth().onAuthStateChanged(function (user) {
  */
 function writeUserData(name,username,email) {
 
-    console.log(name)
+    console.log(name);
     var userId = firebase.auth().currentUser.uid;
     firebase.database().ref('users/'+userId).update({
         email: email,
@@ -145,10 +133,12 @@ function writevegitables(name, quantity, price, date, image) {
     firebase.database().ref('users/' + username + "/products/" + name).update({
         quantity: quantity,
         price: price,
-        date: date
+        date: date,
+        images:image.name
     });
 
-    filestorage.ref('users/' + username + "/products/" + name + "/" + image.name).put(image)
+    filestorage.ref('users/' + username + "/products/" + name + "/" + image.name).put(image).then(function () {
+        window.parent.location.href = "index.html"});
 }
 
 
@@ -226,7 +216,8 @@ function readUserData(userId) {
              do things for a single product base inside a user
              */
             var values= child.val();
-            changetest(child.key,values.price,values.quantity,values.date);
+            var storageref = filestorage.ref('users/' + userId + "/products/" + child.key + "/" + values.images)
+            changetest(child.key,values.price,values.quantity,values.date,storageref);
 
 
         });
@@ -250,23 +241,29 @@ this is the function used to change the data on the frame of the buyer website
 }
 */
 
-function changetest(names,prices,quantity,dates) {
-    var mc = document.getElementById("main-content");
-    var name = document.createElement("LABEL");
-    var price = document.createElement("LABEL");
-    var qua = document.createElement("LABEL");
-    var date = document.createElement("LABEL");
+function changetest(names,prices,quantity,dates,images) {
 
-    name.innerHTML = "name: "+names+"<br>";
-    price.innerHTML = "price: "+prices+"<br>";
-    qua.innerHTML = "quantity: "+quantity+"<br>";
-    date.innerHTML = "date: "+dates+"<br><br>";
+    images.getDownloadURL().then(function(url) {
 
-    mc.appendChild(name);
-    mc.appendChild(price);
-    mc.appendChild(qua);
-    mc.appendChild(date);
+        var mc = document.getElementById("main-content");
 
+        var image = document.createElement("img");
+        var name = document.createElement("LABEL");
+        var price = document.createElement("LABEL");
+        var qua = document.createElement("LABEL");
+        var date = document.createElement("LABEL");
+
+        image.src = url;
+        name.innerHTML = "name: "+names+"<br>";
+        price.innerHTML = "price: "+prices+"<br>";
+        qua.innerHTML = "quantity: "+quantity+"<br>";
+        date.innerHTML = "date: "+dates+"<br><br>";
+
+        mc.appendChild(image);
+        mc.appendChild(name);
+        mc.appendChild(price);
+        mc.appendChild(qua);
+        mc.appendChild(date);
+
+});
 }
-
-
