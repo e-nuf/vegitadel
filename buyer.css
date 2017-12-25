@@ -14,11 +14,24 @@ label {
     font-family: roboto;
 }
 
-div {
+div[id=main-content] {
     height: 3%;
     line-height: 300%;
     text-align: center;
     border: 2px dashed #f69c55;
 }
 
+div[class = "card"]{
+    border: 1px solid rgba(0,0,0,0.4);
+    background: #f7f7f7;
+    float: left;
+    position: relative;
+    padding: 10px;
+}
+
+div:hover[class = "card"] {
+
+    margin: -5px 0 0 -5px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8)
+}
 

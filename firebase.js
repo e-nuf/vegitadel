@@ -157,6 +157,19 @@ function submitveg() {
 }
 
 
+function writebuydata(name,price,quantity,urname,mail) {
+
+    var username = firebase.auth().currentUser.uid;
+
+    firebase.database().ref('orders/' + username + "/products/" + name).update({
+        quantity: quantity,
+        price: price,
+        name:urname,
+        mob:mail
+    });
+}
+
+
 /*
 this is for reading data , do not mx and match
  */
@@ -192,14 +205,18 @@ function readUsernames() {
             /*
              do things for each individual users
              */
-            readUserData(child.key)
+            var snapval = child.val();
+            var urname = snapval.name;
+            var mail = snapval.email;
+            readUserData(child.key,urname,mail)
 
         });
     });
 }
 
 
-function readUserData(userId) {
+buyerid  =0;
+function readUserData(userId,urname,mail) {
 
     var prodref = firebase.database().ref('/users/'+userId);
     var itemref = prodref.child("products");
@@ -211,13 +228,16 @@ function readUserData(userId) {
         /*
         this function iterates over the enter product base for each product
          */
+
         snapshot.forEach(function (child) {
             /*
              do things for a single product base inside a user
              */
+
+            buyerid+=1;
             var values= child.val();
-            var storageref = filestorage.ref('users/' + userId + "/products/" + child.key + "/" + values.images)
-            changetest(child.key,values.price,values.quantity,values.date,storageref);
+            var storageref = filestorage.ref('users/' + userId + "/products/" + child.key + "/" + values.images);
+            changetest(child.key,values.price,values.quantity,values.date,storageref,buyerid,urname,mail);
 
 
         });
@@ -241,29 +261,44 @@ this is the function used to change the data on the frame of the buyer website
 }
 */
 
-function changetest(names,prices,quantity,dates,images) {
+function changetest(names,prices,quantity,dates,images,id,urname,mail) {
 
     images.getDownloadURL().then(function(url) {
 
-        var mc = document.getElementById("main-content");
+        var page = document.getElementById("main-content");
+
+        var mc = document.createElement("div");
+        mc.id=id+"";
+        mc.className = "card";
+
 
         var image = document.createElement("img");
         var name = document.createElement("LABEL");
         var price = document.createElement("LABEL");
         var qua = document.createElement("LABEL");
         var date = document.createElement("LABEL");
+        var btn = document.createElement("button");
 
         image.src = url;
         name.innerHTML = "name: "+names+"<br>";
         price.innerHTML = "price: "+prices+"<br>";
         qua.innerHTML = "quantity: "+quantity+"<br>";
         date.innerHTML = "date: "+dates+"<br><br>";
+        btn.innerText = "buy";
+        btn.onclick = function() {buy(names,prices,quantity,urname,mail)  };
 
         mc.appendChild(image);
         mc.appendChild(name);
         mc.appendChild(price);
         mc.appendChild(qua);
         mc.appendChild(date);
+        mc.appendChild(btn);
+        page.appendChild(mc);
 
 });
+}
+
+function buy(name,price,quantity,urname,mail){
+    console.log(name,price,quantity,urname,mail);
+    writebuydata(name,price,quantity,urname,mail);
 }
