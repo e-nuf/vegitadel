@@ -28,7 +28,7 @@
         <a href="" id="purchases"></a>
         <a href="" id = "orders"></a>
         <a href="#" onclick="openFrame('login.html')" id="loi">Login</a>
-        
+        <a href="#" id="cart"></a>
     </div>
 
     <iframe  id="showframe"></iframe>
@@ -39,7 +39,7 @@
     firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         document.getElementById('signout').innerHTML = "Sign-out";
-        console.log(user.email+" is logged In");
+        console.log(user.uid+" is logged In");
         changeconsole()
 
     }

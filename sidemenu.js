@@ -45,5 +45,10 @@ function changeconsole() {
     loi.innerHTML ="profile";
     loi.onclick = function(){openNav();};
 
+    var cart= document.getElementById("cart");
+    cart.innerHTML ="cart";
+    cart.onclick = function(){openFrame("cart.html")};
+
+
 }
 

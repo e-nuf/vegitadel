@@ -157,15 +157,14 @@ function submitveg() {
 }
 
 
-function writebuydata(name,price,quantity,urname,mail) {
+function addtocart(name,price,quantity,userId) {
 
     var username = firebase.auth().currentUser.uid;
 
-    firebase.database().ref('orders/' + username + "/products/" + name).update({
+    firebase.database().ref('users/' + username + "/cart/" + name).update({
         quantity: quantity,
         price: price,
-        name:urname,
-        mob:mail
+        fromuser:userId
     });
 }
 
@@ -206,9 +205,7 @@ function readUsernames() {
              do things for each individual users
              */
             var snapval = child.val();
-            var urname = snapval.name;
-            var mail = snapval.email;
-            readUserData(child.key,urname,mail)
+            readUserData(child.key)
 
         });
     });
@@ -216,7 +213,7 @@ function readUsernames() {
 
 
 buyerid  =0;
-function readUserData(userId,urname,mail) {
+function readUserData(userId) {
 
     var prodref = firebase.database().ref('/users/'+userId);
     var itemref = prodref.child("products");
@@ -237,7 +234,7 @@ function readUserData(userId,urname,mail) {
             buyerid+=1;
             var values= child.val();
             var storageref = filestorage.ref('users/' + userId + "/products/" + child.key + "/" + values.images);
-            changetest(child.key,values.price,values.quantity,values.date,storageref,buyerid,urname,mail);
+            changetest(child.key,values.price,values.quantity,values.date,storageref,buyerid,userId);
 
 
         });
@@ -261,7 +258,7 @@ this is the function used to change the data on the frame of the buyer website
 }
 */
 
-function changetest(names,prices,quantity,dates,images,id,urname,mail) {
+function changetest(names,prices,quantity,dates,images,id,userId) {
 
     images.getDownloadURL().then(function(url) {
 
@@ -284,8 +281,8 @@ function changetest(names,prices,quantity,dates,images,id,urname,mail) {
         price.innerHTML = "price: "+prices+"<br>";
         qua.innerHTML = "quantity: "+quantity+"<br>";
         date.innerHTML = "date: "+dates+"<br><br>";
-        btn.innerText = "buy";
-        btn.onclick = function() {buy(names,prices,quantity,urname,mail)  };
+        btn.innerText = "add to cart";
+        btn.onclick = function() {cartit(names,prices,quantity,userId)  };
 
         mc.appendChild(image);
         mc.appendChild(name);
@@ -298,7 +295,80 @@ function changetest(names,prices,quantity,dates,images,id,urname,mail) {
 });
 }
 
-function buy(name,price,quantity,urname,mail){
-    console.log(name,price,quantity,urname,mail);
-    writebuydata(name,price,quantity,urname,mail);
+function cartit(name,price,quantity,userId){
+    console.log(name,price,quantity,userId);
+    addtocart(name,price,quantity,userId);
+}
+
+
+
+/*
+ths is the function to reshow the cart
+ */
+function addcartdetails() {
+    var page = document.getElementById("cart-content");
+    var btn = document.createElement("button");
+    btn.innerText = "show cart";
+    btn.onclick = function() {getusercart()};
+    page.appendChild(btn);
+
+
+
+}
+
+
+function getusercart() {
+    username = firebase.auth().currentUser.uid;
+    console.log(username);
+
+    var cartid = 0;
+    var cartref = firebase.database().ref('users/' + username + "/cart/");
+    cartref.once("value").then(function (snapshot) {
+        snapshot.forEach(function (child) {
+            var values = child.val();
+            cartid+=1;
+            showusercart(child.key,values.price,values.quantity,values.fromuser,cartid)
+
+        })
+    })
+}
+
+
+function showusercart(prodname,prices,quantity,imguser,id) {
+
+    var filenameref = firebase.database().ref('users/' + imguser + "/products/" + prodname);
+    filenameref.once("value").then(function (snapshot) {
+        var val = snapshot.val();
+
+        var storageref = filestorage.ref('users/' + imguser + "/products/" + prodname + "/" + val.images);
+        storageref.getDownloadURL().then(function(url) {
+
+            var page = document.getElementById("cart-content");
+
+            var mc = document.createElement("div");
+            mc.id=id+"";
+            mc.className = "card";
+
+
+            var image = document.createElement("img");
+            var name = document.createElement("LABEL");
+            var price = document.createElement("LABEL");
+            var qua = document.createElement("LABEL");
+            var total = document.createElement("LABEL");
+
+            image.src = url;
+            name.innerHTML = "name: "+prodname+"<br>";
+            price.innerHTML = "price: "+prices+"<br>";
+            qua.innerHTML = "quantity: "+quantity+"<br>";
+            total.innerHTML = "total: "+parseFloat(prices)*parseFloat(quantity)+"<br><br>";
+
+            mc.appendChild(image);
+            mc.appendChild(name);
+            mc.appendChild(price);
+            mc.appendChild(qua);
+            mc.appendChild(total);
+            page.appendChild(mc);
+
+        });
+    })
 }
